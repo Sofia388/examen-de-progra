@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript">
+          function guardarDato() {
+        const nombre = document.getElementById("nombre").value;
+        const movil = document.getElementById("movil").value;
+        localStorage.setItem(nombre, movil);
+        document.getElementById("nombre").value = "";
+        document.getElementById("movil").value = "";
+        actualizarDatos();
+    }
+
+    function recuperarDato () {
+        const  nombre  =  documento . getElementById ( "nombre" ). valor ;
+        let  datos  =  localStorage . getItem ( nombre );
+        datos  =  JSON . analizar ( datos );
+        documento . getElementById ( "movil" ). valor  =  datos . Móvil ;
+        documento . getElementById ( "correo electrónico" ). valor  =  datos . correo electrónico ;
+    }
+    function eliminarDato() {
+        const nombre = document.getElementById("nombre").value;
+        localStorage.removeItem(nombre);
+        actualizarDatos();
+    }
+    function eliminarTodo() {
+        localStorage.clear();
+        actualizarDatos();
+    }
+    function actualizarDatos() {
+        let pares = "";
+        if (localStorage.length === 0) {
+            pares += '<li class="list-group-item">Vacío</li>';
+        } else {
+            for (let i = 0; i <= localStorage.length - 1; i++) {
+                const key = localStorage.key(i);
+                pares += `<li class="list-group-item"><span class="badge badge-info">${localStorage.getItem(key)}</span>${key}</li>`;
+            }
+        }
+        document.getElementById('contactos').innerHTML = pares;
+    }
+
+
+actualizarDatos()
+  </script>
+</head>
+<body>
+        <div id="contenedor" class="container" align="center">
+        <header>
+            <p>Agenda de contactos</p>            
+        </header>
+            <hr>
+                <form class="form-inline">
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Contacto</span>
+                        <input type="text" class="form-control" placeholder="Nombre" id="nombre" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Número</span>
+                        <input type="text" class="form-control" placeholder="movil" id="movil" aria-describedby="basic-addon1">
+                    </div>
+
+                </form>
+            <hr/>
+
+            <div id="gbotones" class="btn-group" role="group" aria-label="...">
+                    <button type="button" onclick="guardarDato()" class="btn btn-info">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Guardar
+                    </button>
+                    <button type="button" onclick="eliminarDato()" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Eliminar
+                    </button>
+                    <button type="button" onclick="eliminarTodo()" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Eliminar Todos
+                    </button>
+                    <button type="button" onclick="recuperarDato()" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span> Recuperar
+                </button>
+            </div>
+        <ul id="contactos" class="list-group">
+        </ul>
+    </div>
+</body>
+    <style type="text/css">
+         #contenedor {
+            width: 1000px;
+            height: 100%;
+            width: 1350px;
+            background-color: #FFF0F5;
+        }
+        
+        #gbotones {
+            margin-bottom: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 10px;
+        }
+        
+        .badge-info {
+            background-color: #5bc0de;
+        }
+
+        header{
+            background-color: #CD5C5C;
+            height: 130PX;
+            line-height: 130px;
+        }
+
+        form{
+            margin-top: 5px;
+            height: 200PX;
+            background-color: #FA8072;
+        }
+
+        p{
+            font-family: "Courier New";
+            font-size: xxx-large;
+        }
+
+        .btn-group{
+            background-color: #CD5C5C;
+            height: 50PX;
+            line-height: 50px;
+        }
+
+    </style>
+</html>
